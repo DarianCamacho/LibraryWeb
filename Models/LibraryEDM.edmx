@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibreriaInternacionalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="CodigoPostal" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="NumeroTarjeta" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaExpiracion" Type="datetime" Nullable="false" />
+          <Property Name="CodigoSeguridad" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCompra" Type="datetime" Nullable="false" />
+          <Property Name="IdCliente" Type="int" Nullable="false" />
+          <Property Name="ISBNLibro" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Libros">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Name="ISBN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Titulo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Autor" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaPublicacion" Type="datetime" Nullable="false" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Foto" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK__Facturas__IdClie__3B75D760">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturas__ISBNLi__3C69FB99">
+          <End Role="Libros" Type="Self.Libros" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Libros">
+              <PropertyRef Name="ISBN" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="ISBNLibro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibreriaInternacionalModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Libros" EntityType="Self.Libros" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Facturas__IdClie__3B75D760" Association="Self.FK__Facturas__IdClie__3B75D760">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturas__ISBNLi__3C69FB99" Association="Self.FK__Facturas__ISBNLi__3C69FB99">
+            <End Role="Libros" EntitySet="Libros" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibreriaInternacionalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Pais" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CodigoPostal" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NumeroTarjeta" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaExpiracion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CodigoSeguridad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__IdClie__3B75D760" FromRole="Clientes" ToRole="Facturas" />
+        </EntityType>
+        <EntityType Name="Facturas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdCliente" Type="Int32" Nullable="false" />
+          <Property Name="ISBNLibro" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clientes" Relationship="Self.FK__Facturas__IdClie__3B75D760" FromRole="Facturas" ToRole="Clientes" />
+          <NavigationProperty Name="Libros" Relationship="Self.FK__Facturas__ISBNLi__3C69FB99" FromRole="Facturas" ToRole="Libros" />
+        </EntityType>
+        <EntityType Name="Libros">
+          <Key>
+            <PropertyRef Name="ISBN" />
+          </Key>
+          <Property Name="ISBN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Titulo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Autor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FechaPublicacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Foto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Facturas" Relationship="Self.FK__Facturas__ISBNLi__3C69FB99" FromRole="Libros" ToRole="Facturas" />
+        </EntityType>
+        <Association Name="FK__Facturas__IdClie__3B75D760">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Facturas__ISBNLi__3C69FB99">
+          <End Role="Libros" Type="Self.Libros" Multiplicity="1" />
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Libros">
+              <PropertyRef Name="ISBN" />
+            </Principal>
+            <Dependent Role="Facturas">
+              <PropertyRef Name="ISBNLibro" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LibreriaInternacionalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+          <EntitySet Name="Facturas" EntityType="Self.Facturas" />
+          <EntitySet Name="Libros" EntityType="Self.Libros" />
+          <AssociationSet Name="FK__Facturas__IdClie__3B75D760" Association="Self.FK__Facturas__IdClie__3B75D760">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Facturas__ISBNLi__3C69FB99" Association="Self.FK__Facturas__ISBNLi__3C69FB99">
+            <End Role="Libros" EntitySet="Libros" />
+            <End Role="Facturas" EntitySet="Facturas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibreriaInternacionalModelStoreContainer" CdmEntityContainer="LibreriaInternacionalEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="LibreriaInternacionalModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="NumeroTarjeta" ColumnName="NumeroTarjeta" />
+                <ScalarProperty Name="FechaExpiracion" ColumnName="FechaExpiracion" />
+                <ScalarProperty Name="CodigoSeguridad" ColumnName="CodigoSeguridad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facturas">
+            <EntityTypeMapping TypeName="LibreriaInternacionalModel.Facturas">
+              <MappingFragment StoreEntitySet="Facturas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="ISBNLibro" ColumnName="ISBNLibro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Libros">
+            <EntityTypeMapping TypeName="LibreriaInternacionalModel.Libros">
+              <MappingFragment StoreEntitySet="Libros">
+                <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Autor" ColumnName="Autor" />
+                <ScalarProperty Name="FechaPublicacion" ColumnName="FechaPublicacion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
